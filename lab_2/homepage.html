@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetCode Homepage - Dark Mode</title>
+    <!-- Link Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #343a40; /* Màu nền tối cho trang */
+            color: #ffffff; /* Màu chữ sáng */
+        }
+        .navbar-custom {
+            background-color: #007bff; /* Màu nền cho navbar */
+        }
+        .navbar-custom .nav-link {
+            color: white; /* Màu chữ cho liên kết trong navbar */
+        }
+        .hero-section {
+            padding: 30px;
+            text-align: center;
+            background-color: #495057; /* Màu nền cho hero section */
+            margin-bottom: 30px;
+            border-radius: 8px; /* Bo góc */
+        }
+        .card {
+            background-color: #495057; /* Màu nền cho các thẻ bài tập */
+            border: none; /* Bỏ viền cho các thẻ */
+            margin: 10px 0; /* Khoảng cách giữa các thẻ bài tập */
+        }
+        .card-title, .card-text {
+            color: #ffffff; /* Màu chữ trong thẻ */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Màu nền cho nút */
+            border: none; /* Bỏ viền cho nút */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar (Thanh điều hướng) -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="#">LeetCode Clone</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Problems</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contests</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Discuss</a>
+                </li>
+            </ul>
+            <a class="btn btn-primary my-2 my-sm-0" href="./index.html">Login</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Welcome to LeetCode Clone</h1>
+        <p>Improve your coding skills by solving problems!</p>
+        <input type="text" class="form-control" placeholder="Search for problems..." style="width: 300px; margin: auto;">
+    </div>
+
+    <!-- List of Problems -->
+    <div class="container">
+        <h2>Popular Problems</h2>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">1. Two Sum</h5>
+                <p class="card-text">Given an array of integers, return indices of the two numbers such that they add up to a specific target.</p>
+                <a href="converter.html?problem=TwoSum" class="btn btn-primary">Solve</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">2. Add Two Numbers</h5>
+                <p class="card-text">You are given two non-empty linked lists representing two non-negative integers.</p>
+                <a href="converter.html?problem=AddTwoNumbers" class="btn btn-primary">Solve</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">3. Longest Substring Without Repeating Characters</h5>
+                <p class="card-text">Given a string, find the length of the longest substring without repeating characters.</p>
+                <a href="converter.html?problem=LongestSubstring" class="btn btn-primary">Solve</a>
+            </div>
+        </div>
+        <!-- Thêm nhiều bài tập khác ở đây -->
+    </div>
+
+    <!-- Link jQuery và Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

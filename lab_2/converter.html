@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Converter</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .converter-container {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea {
+            resize: none;
+            height: 200px;
+        }
+
+        .result-textarea {
+            background-color: #e9ecef;
+        }
+
+        .navbar-custom {
+            background-color: #4CAF50; /* Màu nền xanh lá cây */
+        }
+
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: white; /* Màu chữ trắng */
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #f8f9fa; /* Màu khi hover */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar (Thanh điều hướng) -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="./homepagereal.html">Code Converter</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="./homepagereal.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+            <a href="./index.html" class="ms-auto"> <!-- Sử dụng ms-auto để đẩy nút Login sang bên phải -->
+                <button class="btn login-btn my-2 my-sm-0">Login</button>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 converter-container">
+                <h2 class="text-center mb-4">Code Converter</h2>
+                <div id="problemDescription" class="mb-3"></div>
+                <div class="mb-3">
+                    <label for="inputCode" class="form-label">Input Code</label>
+                    <textarea class="form-control" id="inputCode" placeholder="Enter your code here"></textarea>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="inputLanguage" class="form-label">Input Language</label>
+                        <select class="form-select" id="inputLanguage">
+                            <option selected>Choose input language</option>
+                            <option value="1">JavaScript</option>
+                            <option value="2">Python</option>
+                            <option value="3">Java</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="outputLanguage" class="form-label">Output Language</label>
+                        <select class="form-select" id="outputLanguage">
+                            <option selected>Choose output language</option>
+                            <option value="1">JavaScript</option>
+                            <option value="2">Python</option>
+                            <option value="3">Java</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" id="convertButton">Convert</button>
+
+                <div class="mb-3">
+                    <label for="outputCode" class="form-label">Output Code</label>
+                    <textarea class="form-control result-textarea" id="outputCode" readonly></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Lấy thông tin từ URL và hiển thị bài tập
+        const urlParams = new URLSearchParams(window.location.search);
+        const problem = urlParams.get('problem');
+
+        const problemDescription = {
+            TwoSum: "Given an array of integers, return indices of the two numbers such that they add up to a specific target.",
+            AddTwoNumbers: "You are given two non-empty linked lists representing two non-negative integers.",
+            LongestSubstring: "Given a string, find the length of the longest substring without repeating characters."
+        };
+
+        document.getElementById('problemDescription').innerText = problem ? problemDescription[problem] : "Problem not found.";
+
+        // Xử lý nút Convert
+        document.getElementById('convertButton').addEventListener('click', function () {
+            const inputCode = document.getElementById('inputCode').value;
+            const inputLanguage = document.getElementById('inputLanguage').value;
+            const outputLanguage = document.getElementById('outputLanguage').value;
+
+            // Thực hiện chuyển đổi ở đây (hiện tại chỉ là một ví dụ)
+            let outputCode = `Converted code from ${inputLanguage} to ${outputLanguage}:\n${inputCode}`;
+            document.getElementById('outputCode').value = outputCode;
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
