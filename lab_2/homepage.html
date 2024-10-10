@@ -1,64 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LeetCode Homepage - Dark Mode</title>
+    <title>Student Dashboard - LeetCode Clone</title>
     <!-- Link Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #343a40; /* Màu nền tối cho trang */
-            color: #ffffff; /* Màu chữ sáng */
+            background-color: #282828;
+            /* Dark background for the page */
+            color: #ffffff;
+            /* Light text color */
         }
+
         .navbar-custom {
-            background-color: #007bff; /* Màu nền cho navbar */
+            background-color: #282828;
+            /* Background color for the navbar */
         }
+
         .navbar-custom .nav-link {
-            color: white; /* Màu chữ cho liên kết trong navbar */
+            color: #0073e6;
+            /* Link color in navbar */
         }
+
         .hero-section {
             padding: 30px;
             text-align: center;
-            background-color: #495057; /* Màu nền cho hero section */
+            background-color: #495057;
+            /* Background color for hero section */
             margin-bottom: 30px;
-            border-radius: 8px; /* Bo góc */
+            border-radius: 8px;
+            /* Rounded corners */
         }
+
         .card {
-            background-color: #495057; /* Màu nền cho các thẻ bài tập */
-            border: none; /* Bỏ viền cho các thẻ */
-            margin: 10px 0; /* Khoảng cách giữa các thẻ bài tập */
+            background-color: #495057;
+            /* Background color for exercise cards */
+            border: none;
+            /* No border for cards */
+            margin: 10px 0;
+            /* Spacing between exercise cards */
         }
-        .card-title, .card-text {
-            color: #ffffff; /* Màu chữ trong thẻ */
+
+        .card-title,
+        .card-text {
+            color: #ffffff;
+            /* Text color in cards */
         }
+
         .btn-primary {
-            background-color: #007bff; /* Màu nền cho nút */
-            border: none; /* Bỏ viền cho nút */
+            background-color: #007bff;
+            /* Button background color */
+            border: none;
+            /* No border for button */
+        }
+
+        .exercise-category {
+            margin-bottom: 20px;
+        }
+
+        .filter-section {
+            margin-bottom: 20px;
+        }
+
+        .exercise-status {
+            margin-top: 10px;
         }
     </style>
 </head>
-<body>
 
-    <!-- Navbar (Thanh điều hướng) -->
+<body>
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
-        <a class="navbar-brand" href="#">LeetCode Clone</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
+        <a class="navbar-brand" href="homepage.html">LeetCode Clone</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Problems</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contests</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Discuss</a>
+                    <a class="nav-link" href="index.html">Logout</a>
                 </li>
             </ul>
-            <a class="btn btn-primary my-2 my-sm-0" href="./index.html">Login</a>
         </div>
     </nav>
 
@@ -66,38 +88,109 @@
     <div class="hero-section">
         <h1>Welcome to LeetCode Clone</h1>
         <p>Improve your coding skills by solving problems!</p>
-        <input type="text" class="form-control" placeholder="Search for problems..." style="width: 300px; margin: auto;">
+        
     </div>
 
-    <!-- List of Problems -->
-    <div class="container">
-        <h2>Popular Problems</h2>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">1. Two Sum</h5>
-                <p class="card-text">Given an array of integers, return indices of the two numbers such that they add up to a specific target.</p>
-                <a href="converter.html?problem=TwoSum" class="btn btn-primary">Solve</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">2. Add Two Numbers</h5>
-                <p class="card-text">You are given two non-empty linked lists representing two non-negative integers.</p>
-                <a href="converter.html?problem=AddTwoNumbers" class="btn btn-primary">Solve</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">3. Longest Substring Without Repeating Characters</h5>
-                <p class="card-text">Given a string, find the length of the longest substring without repeating characters.</p>
-                <a href="converter.html?problem=LongestSubstring" class="btn btn-primary">Solve</a>
-            </div>
-        </div>
-        <!-- Thêm nhiều bài tập khác ở đây -->
+    <!-- Filter Section -->
+    <div class="container filter-section d-flex">
+        <h3>Filter by Programming Language:</h3>
+        <input type="text" class="form-control" id="searchBar" placeholder="Search for problems..."
+            style="width: 300px; margin: auto;">
+        <select id="languageFilter" class="form-control" style="width: 300px; margin: auto;">
+            <option value="">All Languages</option>
+            <option value="C">C</option>
+            <option value="Python">Python</option>
+            <option value="Java">Java</option>
+        </select>
     </div>
 
-    <!-- Link jQuery và Bootstrap JS -->
+    <!-- Dashboard -->
+    <div class="container" id="exerciseContainer">
+        <h2>Available Exercises</h2>
+
+        <!-- C Programming Exercises -->
+        <div class="exercise-category" data-language="C">
+            <h3>C Programming</h3>
+            <div class="card" data-status="not-started">
+                <div class="card-body">
+                    <h5 class="card-title">1. Two Sum</h5>
+                    <p class="card-text">Given an array of integers, return indices of the two numbers such that they add up to a specific target.</p>
+                    <p><strong>Difficulty:</strong> Easy | <strong>Points:</strong> 5</p>
+                    <p class="exercise-status"><strong>Status:</strong> Not Started</p>
+                    <a href="exercise-detail.html?problem=TwoSum" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+            <!-- Add more exercises here -->
+        </div>
+
+        <!-- Python Programming Exercises -->
+        <div class="exercise-category" data-language="Python">
+            <h3>Python Programming</h3>
+            <div class="card" data-status="in-progress">
+                <div class="card-body">
+                    <h5 class="card-title">2. Add Two Numbers</h5>
+                    <p class="card-text">You are given two non-empty linked lists representing two non-negative integers.</p>
+                    <p><strong>Difficulty:</strong> Medium | <strong>Points:</strong> 10</p>
+                    <p class="exercise-status"><strong>Status:</strong> In Progress</p>
+                    <a href="exercise-detail.html?problem=AddTwoNumbers" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+            <!-- Add more exercises here -->
+        </div>
+
+        <!-- Java Programming Exercises -->
+        <div class="exercise-category" data-language="Java">
+            <h3>Java Programming</h3>
+            <div class="card" data-status="completed">
+                <div class="card-body">
+                    <h5 class="card-title">3. Longest Substring Without Repeating Characters</h5>
+                    <p class="card-text">Given a string, find the length of the longest substring without repeating characters.</p>
+                    <p><strong>Difficulty:</strong> Hard | <strong>Points:</strong> 15</p>
+                    <p class="exercise-status"><strong>Status:</strong> Completed</p>
+                    <a href="exercise-detail.html?problem=LongestSubstring" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+            <!-- Add more exercises here -->
+        </div>
+    </div>
+
+    <!-- Link jQuery and Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+          window.onload = function() {
+            const isLoggedIn = localStorage.getItem("isLoggedIn");
+            if (isLoggedIn !== "true") {
+                // Nếu chưa đăng nhập, chuyển hướng đến trang login
+                window.location.href = "index.html";
+            }
+        };
+        // Filter exercises by language
+        $('#languageFilter').change(function () {
+            var selectedLanguage = $(this).val();
+            $('.exercise-category').each(function () {
+                var categoryLanguage = $(this).data('language');
+                if (selectedLanguage === "" || selectedLanguage === categoryLanguage) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+
+        // Search exercises by keyword
+        $('#searchBar').on('input', function () {
+            var searchTerm = $(this).val().toLowerCase();
+            $('.card').each(function () {
+                var title = $(this).find('.card-title').text().toLowerCase();
+                if (title.includes(searchTerm)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>

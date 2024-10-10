@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submission Result</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .result-container {
+            margin-top: 20px;
+        }
+
+        .status-passed {
+            color: green;
+        }
+
+        .status-failed {
+            color: red;
+        }
+
+        .status-error {
+            color: orange;
+        }
+
+        /* Ensures mobile-friendly design */
+        @media (max-width: 576px) {
+            .result-container {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container result-container">
+        <h2>Submission Results</h2>
+
+        <!-- Status -->
+        <div class="alert alert-info">
+            <strong>Status:</strong> <span id="submissionStatus">Success</span>
+        </div>
+
+        <!-- Score -->
+        <div class="alert alert-info">
+            <strong>Score:</strong> <span id="score">3/5</span>
+        </div>
+
+        <!-- Performance Metrics -->
+        <div class="alert alert-info">
+            <strong>Time Taken:</strong> <span id="timeTaken">150ms</span><br>
+            <strong>Memory Used:</strong> <span id="memoryUsed">20MB</span>
+        </div>
+
+        <!-- Test Cases Results -->
+        <h4>Test Cases:</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Input</th>
+                    <th>Expected Output</th>
+                    <th>Actual Output</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="testCasesResults">
+                <tr>
+                    <td>[Input Value]</td>
+                    <td>[Expected Output]</td>
+                    <td>[Actual Output]</td>
+                    <td class="status-passed">Passed</td>
+                </tr>
+                <tr>
+                    <td>[Input Value]</td>
+                    <td>[Expected Output]</td>
+                    <td>[Actual Output]</td>
+                    <td class="status-failed">Failed</td>
+                </tr>
+                <!-- Additional test cases -->
+            </tbody>
+        </table>
+
+        <!-- Buttons -->
+        <div class="mt-4">
+            <button class="btn btn-secondary" id="displayCode">Review Code</button>
+            <button class="btn btn-secondary" id="tryAgainButton">Try Again</button>
+            <button class="btn btn-primary" id="returnToDashboardButton">Return to Dashboard</button>
+        </div>
+
+        <!-- Feedback Section -->
+        <div class="mt-4">
+            <h5>Feedback</h5>
+            <textarea class="form-control" rows="3" placeholder="Leave your feedback or ask for help..."></textarea>
+            <button class="btn btn-success mt-2">Submit Feedback</button>
+        </div>
+
+        <!-- Hint Button (limited uses) -->
+        <div class="mt-2">
+            <button class="btn btn-warning" id="hintButton">Get a Hint</button>
+            <small id="hintCounter" class="form-text text-muted">Hints left: 3</small>
+        </div>
+
+        <!-- Ranking Section (optional) -->
+        <div class="mt-4" id="rankingSection">
+            <h5>Rankings</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Student Name</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Student A</td>
+                        <td>95</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Student B</td>
+                        <td>90</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal for displaying code -->
+    <div class="modal fade" id="codeModal" tabindex="-1" role="dialog" aria-labelledby="codeModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="codeModalLabel">Your Submitted Code</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <pre id="codeDisplay" class="modal-code">Your submitted code will appear here...</pre>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script section -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Store code submissions for review later
+        document.getElementById('displayCode').onclick = function () {
+            const codeToDisplay = localStorage.getItem('submittedCode') || 'No code submitted.';
+            document.getElementById('codeDisplay').textContent = codeToDisplay;
+            $('#codeModal').modal('show');
+        };
+
+        // Limit hint button usage to 3 times
+        let hintCount = 3;
+        document.getElementById('hintButton').onclick = function () {
+            if (hintCount > 0) {
+                hintCount--;
+                document.getElementById('hintCounter').textContent = `Hints left: ${hintCount}`;
+                // Display hint logic (backend integration needed)
+                alert('Here is your hint!');
+            } else {
+                alert('No hints left!');
+            }
+        };
+
+        // Logic for Try Again and Return to Dashboard buttons
+        document.getElementById('tryAgainButton').onclick = function () {
+            const previousCode = localStorage.getItem('submittedCode');
+        if (previousCode) {
+            document.getElementById('codeEditor').value = previousCode; // Hiển thị lại mã code trong editor
+            alert('Mã code của bạn đã được nạp lại, hãy thử lại!');
+        } else {
+            alert('Không có mã code nào để nạp lại.');
+        }
+        };
+
+        document.getElementById('returnToDashboardButton').onclick = function () {
+            window.location.href = 'homepage.html';
+        };
+
+        // Placeholder for code execution in a secure environment (backend required)
+        // Limit execution time and ensure it runs in a sandboxed environment
+    </script>
+</body>
+
+</html>
