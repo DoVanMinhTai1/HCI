@@ -27,7 +27,6 @@
 
         .navbar-custom {
             background-color: #282828;
-
         }
 
         .navbar-custom .navbar-brand,
@@ -68,7 +67,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                    <a class="nav-link" href="homepage.html">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Exercises</a>
@@ -82,8 +81,8 @@
                 <button class="btn btn-danger me-2" id="clearCodeButton">Clear Code</button>
                 <button class="btn btn-success" id="submitButton">Submit</button>
             </div>
-            <a href="#" class="ms-auto">
-                <button class="btn btn-light">Login</button>
+            <a href="index.html" class="ms-auto">
+                <button class="btn btn-light">Logout</button>
             </a>
         </div>
     </nav>
@@ -94,7 +93,6 @@
             <h4 id="exerciseName">Exercise Title</h4>
             <p id="exerciseDescription">Exercise Description</p>
 
-
             <!-- Code Editor Area -->
             <div class="col-md-6 content">
                 <label for="languageSelector" class="form-label">Choose Programming Language:</label>
@@ -103,7 +101,7 @@
                     <option value="C">C</option>
                     <option value="Java">Java</option>
                 </select>
-                <textarea id="editor" class="form-control editor" placeholder="Write your code here..."></textarea>
+                <textarea id="editor" class="form-control code-editor" placeholder="Write your code here..."></textarea>
             </div>
             <div class="col-md-6 content">
                 <div class="mt-2">
@@ -113,16 +111,23 @@
                 <div class="mt-4">
                     <h5>Predefined Test Cases</h5>
                     <div id="testCasesContainer">
-                        <!-- Các test case sẽ được thêm vào đây bằng JavaScript -->
+                        <!-- Test cases will be added here by JavaScript -->
                     </div>
                 </div>
 
                 <div>
                     <h5>Add Test Case</h5>
-                    <input type="text" id="testCaseInput" placeholder="Enter input" />
-                    <input type="text" id="expectedOutput" placeholder="Enter expected output" />
-                    <button id="addTestCaseButton">Add Test Case</button>
+                    <div class="mb-3">
+                        <input type="text" id="testCaseInput" class="form-control"
+                            placeholder="Enter input (e.g. [1, 2, 3], Target: 3)" />
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" id="expectedOutput" class="form-control"
+                            placeholder="Enter expected output" />
+                    </div>
+                    <button class="btn btn-primary" id="addTestCaseButton">Add Test Case</button>
                 </div>
+
                 <div class="mt-4">
                     <h5>Output Area</h5>
                     <div id="outputArea" class="output-area"></div>
@@ -139,10 +144,11 @@
         window.onload = function () {
             const isLoggedIn = localStorage.getItem("isLoggedIn");
             if (isLoggedIn !== "true") {
-                // Nếu chưa đăng nhập, chuyển hướng đến trang login
+                // If not logged in, redirect to login page
                 window.location.href = "index.html";
             }
         };
+
         document.addEventListener("DOMContentLoaded", function () {
             const urlParams = new URLSearchParams(window.location.search);
             const problem = urlParams.get('problem');
@@ -151,13 +157,14 @@
                 const exercise = exercises[problem];
                 document.getElementById('exerciseName').textContent = exercise.title;
                 document.getElementById('exerciseDescription').textContent = exercise.description;
+                displayTestCases(problem); // Display test cases on load
             } else {
                 document.getElementById('exerciseName').textContent = "Exercise Not Found";
                 document.getElementById('exerciseDescription').textContent = "This problem does not exist.";
             }
         });
 
-        // Đối tượng exercises để chứa bài tập và test case
+        // Object to hold exercises and test cases
         const exercises = {
             "TwoSum": {
                 title: "Two Sum Problem",
@@ -171,7 +178,7 @@
                         input: "[3, 2, 4], Target: 6",
                         expectedOutput: "[1, 2]"
                     }
-                ]  // Khởi tạo mảng test case
+                ]
             },
             "AddTwoNumbers": {
                 title: "Add Two Numbers",
@@ -197,7 +204,7 @@
             }
         };
 
-        // Hàm để thêm test case cho bài tập
+        // Function to add a test case for the exercise
         function addTestCase(problemName, input, expectedOutput) {
             if (exercises[problemName]) {
                 exercises[problemName].testCases.push({
@@ -210,78 +217,66 @@
             }
         }
 
-        // Hàm để hiển thị test cases cho bài tập
+        // Function to display test cases for the exercise
         function displayTestCases(problemName) {
-            const testCasesContainer = document.getElementById("testCasesContainer");
-            testCasesContainer.innerHTML = ''; // Xóa nội dung trước đó
-
-            if (exercises[problemName]) {
-                exercises[problemName].testCases.forEach((testCase, index) => {
-                    const testCaseDiv = document.createElement("div");
-                    testCaseDiv.innerHTML = `
-                <h6>Test Case ${index + 1}:</h6>
-                <div><strong>Input:</strong> ${testCase.input}</div>
-                <div><strong>Expected Output:</strong> ${testCase.expectedOutput}</div>
-            `;
-                    testCasesContainer.appendChild(testCaseDiv);
-                });
-            } else {
-                console.error("Problem not found!");
-            }
+            const testCasesContainer = document.getElementById('testCasesContainer');
+            testCasesContainer.innerHTML = ""; // Clear previous cases
+            exercises[problemName].testCases.forEach((testCase, index) => {
+                const testCaseElement = document.createElement("div");
+                testCaseElement.className = "mb-2";
+                testCaseElement.innerHTML = `<strong>Test Case ${index + 1}:</strong> Input: ${testCase.input}, Expected Output: ${testCase.expectedOutput}`;
+                testCasesContainer.appendChild(testCaseElement);
+            });
         }
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const problem = urlParams.get('problem');
+        // Handle adding new test cases
+        document.getElementById('addTestCaseButton').addEventListener('click', function () {
+            const testCaseInput = document.getElementById('testCaseInput').value;
+            const expectedOutput = document.getElementById('expectedOutput').value;
+            const problemName = new URLSearchParams(window.location.search).get('problem');
 
-            if (problem && exercises[problem]) {
-                const exercise = exercises[problem];
-                document.getElementById('exerciseName').textContent = exercise.title;
-                document.getElementById('exerciseDescription').textContent = exercise.description;
-                displayTestCases(problem);
+            if (testCaseInput && expectedOutput) {
+                addTestCase(problemName, testCaseInput, expectedOutput);
+                displayTestCases(problemName);
+                document.getElementById('testCaseInput').value = ""; // Clear input field
+                document.getElementById('expectedOutput').value = ""; // Clear expected output field
             } else {
-                document.getElementById('exerciseName').textContent = "Exercise Not Found";
-                document.getElementById('exerciseDescription').textContent = "This problem does not exist.";
+                alert("Please fill in both input and expected output fields.");
             }
         });
 
-
-
-
-
-        //                 <button class="btn btn-primary me-2" id="runCodeButton">Run Code</button>
-        // <button class="btn btn-danger me-2" id="clearCodeButton">Clear Code</button>
-        // <button class="btn btn-success" id="submitCodeButton">Submit</button>
-        document.getElementById('clearCodeButton').addEventListener('click', function () {
-            // Clear the code editor and reset status and output area
-            document.getElementById('editor').value = '';
-            document.getElementById('status').innerText = 'Not yet run';
-            document.getElementById('outputArea').innerText = '';
-        });
-        document.getElementById('addTestCaseButton').addEventListener('click', function () {
-            const testCaseInput = prompt("Enter your test case input (array and target, e.g. [1, 2, 3], Target: 3):");
-            const expectedOutput = prompt("Enter the expected output:");
-
-            // Display the custom test case in the output area
-            const outputArea = document.getElementById('outputArea');
-            outputArea.innerText += `\nCustom Test Case:\nInput: ${testCaseInput}\nExpected Output: ${expectedOutput}\n`;
-        });
-        // Code execution functionality (simulated)
+        // Handle code execution
         document.getElementById('runCodeButton').addEventListener('click', function () {
-            const code = document.getElementById('editor').value;
-            const testCases = exercises[new URLSearchParams(window.location.search).get('problem')].testCases;
+            const editorContent = document.getElementById('editor').value;
             const outputArea = document.getElementById('outputArea');
-            outputArea.innerHTML = ''; // Clear previous output
+            const status = document.getElementById('status');
 
-            // Simulate code execution and output
-            testCases.forEach((testCase, index) => {
-                const testOutput = `Output for Test Case ${index + 1}: [Simulated Output]`;
-                outputArea.innerHTML += `<div>${testOutput}</div>`;
-            });
+            // Simulated code execution
+            outputArea.textContent = ""; // Clear previous output
+            status.textContent = "Running...";
 
-            document.getElementById('status').textContent = "Code executed";
+            setTimeout(() => {
+                // Simulated output based on the editor content
+                outputArea.textContent = `Output: Simulated result of executing:\n${editorContent}`;
+
+                // Save the test cases when running the code
+                const testCases = exercises[new URLSearchParams(window.location.search).get('problem')].testCases;
+                const testCaseResults = testCases.map((testCase, index) => {
+                    return `Test Case ${index + 1}:\nInput: ${testCase.input}\nExpected Output: ${testCase.expectedOutput}\n`;
+                }).join("\n");
+
+                // Display test case results
+                outputArea.textContent += `\nTest Case Results:\n${testCaseResults}`;
+                status.textContent = "Execution complete";
+            }, 2000);
         });
 
+        // Clear code editor
+        document.getElementById('clearCodeButton').addEventListener('click', function () {
+            document.getElementById('editor').value = "";
+            document.getElementById('outputArea').textContent = "";
+            document.getElementById('status').textContent = "Not yet run";
+        });
         // Submit Button functionality
         document.getElementById('submitButton').onclick = function () {
             // Chuyển hướng đến Submit.html với test cases và ranking
@@ -297,9 +292,7 @@
             localStorage.setItem('submittedData', JSON.stringify(submittedData)); // Lưu dữ liệu vào localStorage
             window.location.href = 'submit.html'; // Chuyển hướng đến trang submit.html
         };
-
     </script>
-
 </body>
 
 </html>

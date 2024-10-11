@@ -129,7 +129,8 @@
     </div>
 
     <!-- Modal for displaying code -->
-    <div class="modal fade" id="codeModal" tabindex="-1" role="dialog" aria-labelledby="codeModalLabel" aria-hidden="true">
+    <div class="modal fade" id="codeModal" tabindex="-1" role="dialog" aria-labelledby="codeModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -153,6 +154,25 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+        // Hàm cập nhật bảng test cases
+        function updateTestCasesTable(testCases) {
+            const tableBody = document.getElementById('testCasesResults');
+            tableBody.innerHTML = ''; // Xóa nội dung hiện tại của bảng
+
+            testCases.forEach((testCase, index) => {
+                const row = document.createElement('tr');
+
+                // Thêm dữ liệu vào các ô của hàng
+                row.innerHTML = `
+            <td>${testCase.input}</td>
+            <td>${testCase.expectedOutput}</td>
+            <td>${testCase.actualOutput || 'N/A'}</td>
+            <td class="${testCase.status ? (testCase.status.toLowerCase() === 'passed' ? 'status-passed' : 'status-failed') : ''}">${testCase.status || 'Pending'}</td>
+        `;
+
+                tableBody.appendChild(row); // Thêm hàng vào bảng
+            });
+        }
         // Store code submissions for review later
         document.getElementById('displayCode').onclick = function () {
             const codeToDisplay = localStorage.getItem('submittedCode') || 'No code submitted.';
@@ -176,12 +196,12 @@
         // Logic for Try Again and Return to Dashboard buttons
         document.getElementById('tryAgainButton').onclick = function () {
             const previousCode = localStorage.getItem('submittedCode');
-        if (previousCode) {
-            document.getElementById('codeEditor').value = previousCode; // Hiển thị lại mã code trong editor
-            alert('Mã code của bạn đã được nạp lại, hãy thử lại!');
-        } else {
-            alert('Không có mã code nào để nạp lại.');
-        }
+            if (previousCode) {
+                document.getElementById('codeEditor').value = previousCode; // Hiển thị lại mã code trong editor
+                alert('Mã code của bạn đã được nạp lại, hãy thử lại!');
+            } else {
+                alert('Không có mã code nào để nạp lại.');
+            }
         };
 
         document.getElementById('returnToDashboardButton').onclick = function () {
