@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Resources</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            background-color: #e9ecef; /* Màu nền sáng hơn */
+            font-family: 'Arial', sans-serif; /* Font chữ hiện đại */
+        }
+
+        .navbar {
+            background-color: #343a40; /* Màu nền navbar */
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: #ffffff; /* Màu chữ trắng cho navbar */
+        }
+
+        .nav-link:hover {
+            color: #ffc107; /* Màu chữ vàng khi hover */
+        }
+
+        .text-title {
+            font-size: 2.5rem; /* Kích thước chữ tiêu đề */
+            margin-top: 20px;
+            margin-bottom: 40px;
+            font-weight: bold; /* Làm đậm chữ tiêu đề */
+        }
+
+        .card {
+            transition: transform 0.2s, box-shadow 0.2s; /* Hiệu ứng chuyển động */
+            border: none; /* Xóa đường viền mặc định */
+        }
+
+        .card:hover {
+            transform: translateY(-5px); /* Nâng card lên khi hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Thêm bóng mờ */
+        }
+
+        .vienbody {
+            margin-bottom: 30px; /* Khoảng cách giữa các thẻ card */
+        }
+
+        .tailieu {
+            border-radius: 10px; /* Bo góc cho card */
+            background-color: #ffffff; /* Màu nền cho card */
+        }
+
+        .icon {
+            color: #007bff; /* Màu cho icon */
+        }
+
+        .btn-small {
+            font-size: 0.8rem; /* Kích thước nút nhỏ hơn */
+            padding: 0.3rem 0.6rem; /* Padding nút nhỏ hơn */
+        }
+
+        @media (max-width: 576px) {
+            .text-title {
+                font-size: 2rem; /* Kích thước chữ tiêu đề nhỏ hơn trên màn hình nhỏ */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">NLU</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8 mt-5 mx-auto">
+                <h1 class="text-title text-center">Available Resources</h1>
+            </div>
+            <div class="col-10 mx-auto mt-5">
+                <div class="row d-flex flex-wrap justify-content-center">
+                    <div class="vienbody col-12 col-md-4">
+                        <div class="tailieu p-3">
+                            <div class="card">
+                                <div class="d-flex mx-auto mt-3 icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
+                                        class="bi bi-book" viewBox="0 0 16 16">
+                                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
+                                    </svg>
+                                </div>
+                                <div class="card-body">
+                                    <h2 class="text-center">Java</h2>
+                                    <div class="text-center mt-5">
+                                        <a href="./detail/details.html" class="btn btn-primary btn-small">Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vienbody col-12 col-md-4">
+                        <div class="tailieu p-3">
+                            <div class="card">
+                                <div class="d-flex mx-auto mt-3 icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
+                                        class="bi bi-book" viewBox="0 0 16 16">
+                                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
+                                    </svg>
+                                </div>
+                                <div class="card-body">
+                                    <h2 class="text-center">Spring</h2>
+                                    <div class="text-center mt-5">
+                                        <a href="./detail/details.html" class="btn btn-primary btn-small">Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vienbody col-12 col-md-4">
+                        <div class="tailieu p-3">
+                            <div class="card">
+                                <div class="d-flex mx-auto mt-3 icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
+                                        class="bi bi-book" viewBox="0 0 16 16">
+                                        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783" />
+                                    </svg>
+                                </div>
+                                <div class="card-body">
+                                    <h2 class="text-center">Docker</h2>
+                                    <div class="text-center mt-5">
+                                        <a href="./detail/details.html" class="btn btn-primary btn-small">Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4Agym1Zf5E9U6m66kd8cx3RUMa3w/cdDbzK4uK6H68v1zZG1Zpbd" crossorigin="anonymous"></script>
+</body>
+
+</html>
