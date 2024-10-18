@@ -1,36 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Details Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
         body {
             display: flex;
             font-family: Arial, sans-serif;
-            margin: 0; /* Xóa khoảng cách mặc định */
-            height: 100vh; /* Chiều cao của body chiếm toàn bộ màn hình */
+            margin: 0;
+            /* Xóa khoảng cách mặc định */
+            height: 100vh;
+            /* Chiều cao của body chiếm toàn bộ màn hình */
+        }
+
+        .divider {
+            width: 100%;
+            /* Chiều rộng 100% để cắt ngang toàn bộ */
+            height: 2px;
+            /* Độ dày của đường gạch */
+            background-color: black;
+            /* Màu của đường gạch */
+            margin: 10px 0;
+            /* Khoảng cách trên và dưới */
         }
 
         .sidebar {
+            margin-top: 60px;
             width: 30%;
             padding: 10px;
             border-right: 1px solid #ccc;
-            position: fixed; /* Đặt sidebar ở vị trí cố định */
-            height: 100%; /* Chiều cao 100% */
-            overflow-y: auto; /* Thêm cuộn dọc nếu cần */
+            position: fixed;
+            /* Đặt sidebar ở vị trí cố định */
+            height: 100%;
+            /* Chiều cao 100% */
+            overflow-y: auto;
+            /* Thêm cuộn dọc nếu cần */
         }
 
         .content {
+            margin-top: 60px;
             width: 70%;
             padding: 10px;
-            margin-left: 30%; /* Thêm khoảng cách cho content để tránh chồng lên sidebar */
-            display: flex; /* Sử dụng Flexbox */
-            flex-direction: column; /* Căn giữa theo chiều dọc */
-            align-items: center; /* Căn giữa theo chiều ngang */
-            justify-content: flex-start; /* Căn phần nội dung ở phía trên */
+            margin-left: 30%;
+            /* Thêm khoảng cách cho content để tránh chồng lên sidebar */
+            display: flex;
+            /* Sử dụng Flexbox */
+            flex-direction: column;
+            /* Căn giữa theo chiều dọc */
+            align-items: center;
+            /* Căn giữa theo chiều ngang */
+            justify-content: flex-start;
+            /* Căn phần nội dung ở phía trên */
         }
 
         .slide {
@@ -39,62 +64,139 @@
             background-color: #f4f4f4;
             cursor: pointer;
             border-radius: 5px;
-            text-align: center; /* Căn giữa chữ trong slide */
-            transition: background-color 0.3s; /* Hiệu ứng chuyển màu mượt mà */
+            text-align: left;
+            /* Căn giữa chữ trong slide */
+            transition: background-color 0.3s;
+            /* Hiệu ứng chuyển màu mượt mà */
+            border: 2px solid transparent;
         }
 
         .slide:hover {
-            background-color: #e0e0e0; /* Đổi màu khi hover */
+            background-color: #e0e0e0;
+            /* Đổi màu khi hover */
+            border: 2px solid #0f5132;
         }
 
         .slide.active {
-            background-color: #d1e7dd; /* Màu cho slide đang được chọn */
-            border: 1px solid #0f5132;
+            background-color: #d1e7dd;
+            /* Màu cho slide đang được chọn */
+            border: 2px solid #0f5132;
         }
 
         .image-container {
-            margin-top: 20px; /* Khoảng cách giữa nội dung và hình ảnh */
-            width: 100%; /* Đảm bảo container hình ảnh chiếm toàn bộ chiều rộng */
+            margin-top: 20px;
+            /* Khoảng cách giữa nội dung và hình ảnh */
+            width: 100%;
+            /* Đảm bảo container hình ảnh chiếm toàn bộ chiều rộng */
+            max-width: 800px;
+            /* Đặt chiều rộng tối đa cho container (có thể thay đổi theo nhu cầu) */
+            margin-left: auto;
+            /* Căn giữa */
+            margin-right: auto;
+            /* Căn giữa */
+            overflow: hidden;
+            /* Ẩn phần hình ảnh vượt quá container */
         }
+
 
         .image-container img {
-            max-width: 100%; /* Đảm bảo hình ảnh không vượt quá chiều rộng của container */
-            height: auto; /* Giữ tỉ lệ hình ảnh */
-            margin: 10px 0; /* Thêm khoảng cách giữa các hình ảnh */
-        }
-        
-        .img-default {
-            display: flex;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 50%;
+            /* Đảm bảo hình ảnh không vượt quá chiều rộng của container */
+            height: auto;
+            /* Giữ tỉ lệ hình ảnh */
+            margin: 10px 0;
+            /* Thêm khoảng cách giữa các hình ảnh */
+            border: 2px solid transparent;
+            max-height: 50%;
         }
 
+        .img-default {
+            max-width: 800px;
+            /* Đảm bảo hình ảnh không vượt quá chiều rộng của container */
+            height: 800px;
+            /* Giữ tỉ lệ hình ảnh */
+            display: block;
+            /* Đảm bảo không có khoảng trắng bên dưới */
+            margin: 0 auto;
+            /* Căn giữa hình ảnh */
+            border: 5px solid #000;
+            /* Đường viền 5px, màu đen */
+            border-radius: 5px;
+            /* Nếu bạn muốn các góc được bo tròn, có thể thêm thuộc tính này */
+        }
     </style>
 </head>
-<body>
 
+<body>
+    <nav class="navbar navbar-expand-lg" style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">NLU</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
     <div class="sidebar">
         <h2>Chương</h2>
         <div class="slide" onclick="showDetails(1)">
-            <i class="bi bi-book" style="margin-right: 5px;"></i> Chương 1: Giới thiệu
+            <i class="bi bi-book" style="margin-right: 5px;"></i> Chương 1: Lập trình hướng đối tượng
         </div>
         <div class="slide" onclick="showDetails(2)">
-            <i class="bi bi-book" style="margin-right: 5px;"></i> Chương 2: Nội dung chính
+            <i class="bi bi-book" style="margin-right: 5px;"></i> Chương 2: Nhập môn Java
         </div>
         <div class="slide" onclick="showDetails(3)">
-            <i class="bi bi-book" style="margin-right: 5px;"></i> Chương 3: Kết luận
+            <i class="bi bi-book" style="margin-right: 5px;"></i> Chương 3: Nền tảng của ngôn ngữ Java
         </div>
-        <!-- Thêm nhiều slide khác ở đây -->
+        <div class="slide" onclick="showDetails(4)">
+            <i class="bi bi-book" style="margin-right: 5px;"></i> Chương 4: Các gói và giao diện
+        </div>
+        <div class="slide" onclick="showDetails(5)">
+            <i class="bi bi-book" style="margin-right: 5px;"></i> Chương 5: AWT
+        </div>
+        <div class="slide" onclick="showDetails(6)">
+            <i class="bi bi-book" style="margin-right: 5px;"></i> Chương 6: Applets
+        </div>
+        <div class="slide" onclick="showDetails(7)">
+            <i class="bi bi-book" style="margin-right: 5px;"></i> Chương 7: Xử lý ngoại lệ
+        </div>
+        <div class="slide" onclick="showDetails(8)">
+            <i class="bi bi-book" style="margin-right: 5px;"></i> Chương 8: Đa luồng
+        </div>
+        <div class="slide" onclick="showDetails(9)">
+            <i class="bi bi-book" style="margin-right: 5px;"></i> Chương 9: Luồng I/O
+        </div>
+        <div class="slide" onclick="showDetails(10)">
+            <i class="bi bi-book" style="margin-right: 5px;"></i> Chương 10: Thực thi bảo mật
+        </div>
+
     </div>
 
-    <div class="content">
-        <h1 class="text-center mb-5">Java</h1>
+    <div class="content ">
+        
+        <h1 class="text-center ">Java</h1>
+        <div class="d-flex justify-content-between align-items-center w-100">
+
+            <div class="ms-auto me-5 rounded-circle bg-light d-flex justify-content-center align-items-center" style="width: 40px; height: 40px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-down " viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
+          </svg>
+        </div>
+    </div>
         <div id="details" class="text-center">
-            <img src="../image/img-java/0.png" alt="" class="img-default">
-        </div>
-       
-    </div>
+            <img src="../image/7. JavaCore/7. JavaCore-001.png" alt="" class="img-default">
 
+        </div>
+
+    </div>
     <script>
         function showDetails(chapter) {
             const detailsElement = document.getElementById('details');
@@ -109,47 +211,385 @@
             slides[chapter - 1].classList.add('active');
 
             // Cập nhật nội dung chi tiết theo chương
-            switch(chapter) {
+            switch (chapter) {
                 case 1:
                     detailsElement.innerHTML = `
-                        <div class="card mt-3">
-                            <div class="card-body">
-                                <h3 class="card-title">Chương 1: Giới thiệu</h3>
-                                <p>Nội dung giới thiệu chương 1...</p>
-                                <div class=>
-                                    <img src="../image/img-java/1.png" alt="Image 1" class="img-default">
-                                    <img src="../image/img-java/1.1.png" alt="Image 2" class="img-default">
-                                    <img src="../image/img-java/1.2.png" alt="Image 3" class="img-default">
-                                    <img src="../image/img-java/1.3.png" alt="Image 4" class="img-default">
-                                </div>
-                            </div>
-                        </div>
-                    `;
+    <div class="card mt-3">
+        <div class="card-body">
+            <div class="image-wrapper">
+                 <img src="../image/7. JavaCore/7. JavaCore-002.png" alt="" class="img-default">
+                <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-003.png" alt="" class="img-default">
+                <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-004.png" alt="" class="img-default">
+                <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-005.png" alt="" class="img-default">
+                <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-006.png" alt="" class="img-default">
+                <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-007.png" alt="" class="img-default">
+                <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-008.png" alt="" class="img-default">
+                <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-009.png" alt="" class="img-default">
+                <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-010.png" alt="" class="img-default">
+                <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-011.png" alt="" class="img-default">
+                <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-012.png" alt="" class="img-default">
+                <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-013.png" alt="" class="img-default">
+                <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-014.png" alt="" class="img-default">
+                 <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-015.png" alt="" class="img-default">
+                 <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-016.png" alt="" class="img-default">
+                 <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-017.png" alt="" class="img-default">
+                 <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-018.png" alt="" class="img-default">
+                 <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-019.png" alt="" class="img-default">
+                 <div class="divider"></div> <!-- Đường gạch -->
+                <img src="../image/7. JavaCore/7. JavaCore-020.png" alt="" class="img-default">
+                 <div class="divider"></div> <!-- Đường gạch -->
+            </div>
+        </div>
+    </div>
+`;
+
+
                     break;
                 case 2:
                     detailsElement.innerHTML = `
                         <div class="card mt-3">
                             <div class="card-body">
-                                <h3 class="card-title">Chương 2: Nội dung chính</h3>
-                                <p>Nội dung chính của chương 2...</p>
+                                 <div class="image-wrapper">
+                                <img src="../image/7. JavaCore/7. JavaCore-021.png" alt="" class="img-default">
+                                 <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-022.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                     <img src="../image/7. JavaCore/7. JavaCore-023.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-024.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-025.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-026.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-027.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-028.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-029.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                               
+                               </div>
                             </div>
                         </div>
                     `;
-                    chapterImage.src = '../image/img-java/2.png'; // Thay đổi đường dẫn tới ảnh tương ứng
+
                     break;
                 case 3:
                     detailsElement.innerHTML = `
                         <div class="card mt-3">
                             <div class="card-body">
-                                <h3 class="card-title">Chương 3: Kết luận</h3>
-                                <p>Nội dung kết luận chương 3...</p>
+                                <div class="image-wrapper"
+                                <img src="../image/7. JavaCore/7. JavaCore-029.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                     <img src="../image/7. JavaCore/7. JavaCore-030.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-031.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-032.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-033.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-034.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-035.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-036.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-037.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-038.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-039.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-040.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-041.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                 <img src="../image/7. JavaCore/7. JavaCore-042.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-043.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-044.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-045.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-046.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-047.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-048.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-049.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->               
+                                <img src="../image/7. JavaCore/7. JavaCore-050.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-051.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-052.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-053.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-054.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-055.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                </div>
                             </div>
                         </div>
                     `;
-                    chapterImage.src = '../image/img-java/3.png'; // Thay đổi đường dẫn tới ảnh tương ứng
                     break;
-                // Thêm các trường hợp cho các chương khác nếu cần
+                case 4:
+                    detailsElement.innerHTML = `
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <div class="image-wrapper">
+                                <img src="../image/7. JavaCore/7. JavaCore-059.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-060.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-061.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-062.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-063.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-064.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-065.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-066.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-067.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-068.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                   </div>
+                            </div>
+                        </div>`;
+                    break;
+                case 5:
+                    detailsElement.innerHTML = `
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <div class="image-wrapper">
+                                     <img src="../image/7. JavaCore/7. JavaCore-091.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-092.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-093.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-094.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-095.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-096.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-097.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-098.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-099.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-100.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                   </div>
+                            </div>
+                        </div>`;
+                    break;
+                case 6:
+                    detailsElement.innerHTML = `
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <div class="image-wrapper">
+                                    <img src="../image/7. JavaCore/7. JavaCore-128.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-129.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-130.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-131.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-132.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-134.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-135.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-136.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-137.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-138.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                   </div>
+                            </div>
+                        </div>`;
+                    break;
+                case 7:
+                    detailsElement.innerHTML = `
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <div class="image-wrapper">
+                                    <img src="../image/7. JavaCore/7. JavaCore-151.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-152.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-153.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-154.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-155.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-156.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-157.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-158.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-159.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-160.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                   </div>
+                            </div>
+                        </div>`;
+                    break;
+                case 8:
+                    detailsElement.innerHTML = `
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <div class="image-wrapper">
+                                    <img src="../image/7. JavaCore/7. JavaCore-162.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-163.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-164.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-165.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-166.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-167.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-168.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-169.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-170.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-171.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                   </div>
+                            </div>
+                        </div>`;
+                    break;
+                case 10:
+                    detailsElement.innerHTML = `
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <div class="image-wrapper">
+                                    <img src="../image/7. JavaCore/7. JavaCore-202.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-203.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-204.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-205.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-206.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-207.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-208.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-209.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-210.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-211.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                   </div>
+                            </div>
+                        </div>`;
+                    break;
+                case 9:
+                    detailsElement.innerHTML = `
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <div class="image-wrapper">
+                                    <img src="../image/7. JavaCore/7. JavaCore-184.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-185.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-186.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-187.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-188.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-189.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-190.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-191.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-192.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-193.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                   </div>
+                            </div>
+                        </div>`;
+                    break;
+                    case 10:
+                    detailsElement.innerHTML = `
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <div class="image-wrapper">
+                                    <img src="../image/7. JavaCore/7. JavaCore-184.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-185.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-186.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-187.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-188.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-189.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-190.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-191.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-192.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                <img src="../image/7. JavaCore/7. JavaCore-193.png" alt="" class="img-default">
+                                <div class="divider"></div> <!-- Đường gạch -->
+                                   </div>
+                            </div>
+                        </div>`;
+                    break;
             }
+
 
             // Hiển thị hình ảnh
             imageContainer.style.display = 'block';
@@ -157,4 +597,5 @@
     </script>
 
 </body>
+
 </html>
