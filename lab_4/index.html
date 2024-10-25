@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Course Video Page</title>
+    <style>
+        .video-wrapper {
+
+            position: relative;
+            overflow: hidden;
+            background-color: #2d2f31;
+            padding-bottom: 46%;
+            /* Maintain 16:9 ratio */
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+
+        }
+
+
+
+        .info-section {
+            margin-top: 20px;
+        }
+
+        .learning-outcomes {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-top: 50px;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+
+
+
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .content ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+
+        .tags-container {
+            display: flex;
+            flex-direction: column;
+            /* Xếp dọc */
+            gap: 10px;
+            /* Khoảng cách giữa các tag */
+            margin-top: 15px;
+            /* Khoảng cách phía trên các tag */
+            border: 1px solid #ccc;
+            width: 100%;
+
+        }
+
+        .tag-line {
+            display: flex;
+            align-items: stretch;
+            /* Đảm bảo các thẻ tag sẽ cao bằng chiều cao của div cha */
+            border-bottom: #cac0c0 1px solid;
+        }
+
+        .tag-a {
+            display: flex;
+            /* Sử dụng flexbox để căn giữa nội dung */
+            align-items: center;
+            /* Căn giữa nội dung theo chiều dọc */
+            justify-content: center;
+            /* Căn giữa nội dung theo chiều ngang */
+            padding: 25px 40px;
+            /* Padding cho thẻ tag */
+            text-decoration: none;
+            /* Bỏ gạch chân */
+            color: #333;
+            /* Màu chữ */
+            font-size: 14px;
+            /* Kích thước chữ */
+            transition: background-color 0.3s, border-bottom 0.3s;
+            /* Hiệu ứng chuyển màu nền và viền dưới khi hover */
+            border-bottom: 2px solid transparent;
+            /* Viền dưới ban đầu */
+            height: 100%;
+            /* Đặt chiều cao cho thẻ tag */
+            font-size: medium;
+            font-weight: bold;
+        }
+
+        .tag-a:hover {
+            background-color: #dcdcdc;
+            /* Màu nền khi hover */
+            border-bottom: 2px solid black;
+            /* Viền dưới màu đen khi hover */
+            text-decoration: none;
+            /* Bỏ gạch chân khi hover */
+        }
+
+
+        .inline1 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+
+        .rate-xh {
+            display: flex;
+            gap: 30px;
+        }
+
+        .rate-c h5 {
+            font-weight: bold;
+        }
+
+        /* phan chapter */
+        .chapters-list {
+            background-color: white;
+            border: #cac0c0 1px solid;
+            padding-left: 30px;
+
+            margin-left: 0;
+            padding-left: 0;
+        }
+
+
+
+
+        .chapter-item {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            max-height: 100%;
+            /* border-bottom: 1px solid #ccc; */
+            /* Đường kẻ ngang */
+            padding: 10px 0;
+        }
+
+
+
+
+
+        .duration {
+            margin-right: 10px;
+            color: gray;
+        }
+
+        .list-unstyled .container .row {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+
+
+        .collapsible {
+            background-color: #f1f1f1;
+            cursor: pointer;
+            padding: 20px;
+            width: 100%;
+
+            text-align: left;
+            border: none;
+            font-weight: bold;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .p-testc {
+            background-color: #f1f1f1;
+            font-weight: lighter;
+            font-size: medium;
+        }
+
+        .abc {
+            justify-content: start;
+        }
+
+        .abc1 {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            border: #2d2f31 1px solid;
+            padding-left: 20px;
+            padding-right: 20px;
+
+        }
+
+        .divider {
+            width: 100%;
+            /* Chiều rộng 100% để cắt ngang toàn bộ */
+            height: 2px;
+            /* Độ dày của đường gạch */
+            background-color: #cac0c0;
+            /* Màu của đường gạch */
+            margin: 10px 0;
+            /* Khoảng cách trên và dưới */
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2d2f31;">
+        <a class="navbar-brand" href="#">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav"
+            style="display: flex; justify-content: space-between; gap: 100px;">
+
+            <div class="nav-item"
+                style="color: #cac0c0; align-items: center; padding-left: 30px; padding-top: 5px; border-left: #cac0c0 1px solid;">
+                <h5>MuleSoft 4.X Complete Guide For Beginners - Hands-On Projects</h5>
+            </div>
+
+            <div style="display: flex; color: white; gap: 30px; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-star"></i>
+                    <h5 style="margin: 0;">Leave a rating</h5>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-trophy"></i>
+                    <h5 style="margin: 0;">Your progress</h5>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-chevron-down" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                </svg>
+                <div style="display: flex; align-items: center; gap: 10px; border: #cac0c0 3px solid; padding: 10px 10px;">
+
+                    <p style="margin: 0;">Share</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-chevron-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                    </svg>
+                </div>
+                <div style=" border: #cac0c0 3px solid; padding: 10px 10px;">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
+            </div>
+
+
+        </div>
+    </nav>
+
+    <div class="container-fluid ">
+        <div class="row no-gutters ">
+            <div class="col-lg-8 col-md-12  chapters-list" style="margin-left: 0; padding-left: 0;">
+                <div class="video-wrapper">
+                    <div class="video-content">
+                        <iframe src="https://www.youtube.com/embed/0GcOWIPNzjg" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="tag-line">
+                    <a href="#" class="tag-a">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                        </svg>
+                    </a>
+                    <a href="#" class="tag-a">Overview</a>
+                    <a href="#" class="tag-a">Q&A</a>
+                    <a href="#" class="tag-a">Notes</a>
+                    <a href="#" class="tag-a">Announcements</a>
+                    <a href="#" class="tag-a">Reviews</a>
+                    <a href="#" class="tag-a">Learning tools</a>
+                </div>
+                <div style="padding: 60px 60px;">
+
+                    <div class="info-section">
+                        <h3>Upgraded with latest MuleSoft ESB versions, Anypoint Platform, DataWeave, MUnit, DevOps, MCD
+                            Tests and Real-time Project</h3>
+                        <div class="rate-xh gap-30" style="margin-top: 40px;">
+                            <div class="rate-c">
+                                <div class="inline1">
+                                    <h5 style="font-weight: bold;">4.6</h5>
+
+                                    <i class="fa-solid fa-star" style="margin-bottom: 5px; color: yellow;"></i>
+                                </div>
+                                <p>(4,706 ratings)</p>
+                            </div>
+                            <div class="rate-c">
+                                <h5>26,379</h5>
+                                <p>Students</p>
+                            </div>
+                            <div class="rate-c">
+                                <h5>50.5</h5>
+                                <p>hours Total</p>
+                            </div>
+                        </div>
+                        <p style="padding-top: 20px;">Last updated November 2023</p>
+                        <p>Languages: English, English [Auto], French [Auto], and 5 more</p>
+                    </div>
+
+                    <div class="learning-outcomes">
+                        <h5 style="font-weight: bold; font-size: x-large; padding-left: 20px; padding: 20px;">What
+                            You'll Learn</h5>
+                        <div style="display: flex; padding-left: 20px; gap: 40px;">
+                            <div style="padding-bottom: 10px; width: 50%;">
+                                <!-- Cột trái -->
+                                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                                    <i class="fa-sharp fa-solid fa-check"
+                                        style="margin-right: 10px; margin-top: 10px;"></i>
+                                    <p style="margin: 0; padding-top: 4px;">You will become an expert in Mule ESB,
+                                        Anypoint platform operations, MUnit, and DevOps with Mule.</p>
+                                </div>
+                                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                                    <i class="fa-sharp fa-solid fa-check"
+                                        style="margin-right: 10px; margin-top: 10px;"></i>
+                                    <p style="margin: 0; padding-top: 4px;">Step-by-step coding with detailed
+                                        explanations.</p>
+                                </div>
+                                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                                    <i class="fa-sharp fa-solid fa-check"
+                                        style="margin-right: 10px; margin-top: 10px;"></i>
+                                    <p style="margin: 0; padding-top: 4px;">You should be able to set up MuleSoft by
+                                        yourself for your organization.</p>
+                                </div>
+                                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                                    <i class="fa-sharp fa-solid fa-check"
+                                        style="margin-right: 10px; margin-top: 10px;"></i>
+                                    <p style="margin: 0; padding-top: 4px">You will be able to develop, design, and
+                                        manage projects.</p>
+                                </div>
+                                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                                    <i class="fa-sharp fa-solid fa-check"
+                                        style="margin-right: 10px;margin-top: 10px;"></i>
+                                    <p style="margin: 0; padding-top: 4px;">Mule Level 1, Level 2, and Integration
+                                        Associate certifications are guaranteed.</p>
+                                </div>
+                            </div>
+
+                            <div style="padding-bottom: 10px; width: 50%;">
+                                <!-- Cột phải -->
+                                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                                    <i class="fa-sharp fa-solid fa-check"
+                                        style="margin-right: 10px; margin-top: 10px;"></i>
+                                    <p style="margin: 0; padding-top: 4px;">This course teaches you Mule 4.x in depth,
+                                        including all phases of the SDLC.</p>
+                                </div>
+                                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                                    <i class="fa-sharp fa-solid fa-check"
+                                        style="margin-right: 10px; margin-top: 10px;"></i>
+                                    <p style="margin: 0; padding-top: 4px;">You will feel real-time hands-on experience
+                                        after finishing this course.</p>
+                                </div>
+                                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                                    <i class="fa-sharp fa-solid fa-check"
+                                        style="margin-right: 10px; margin-top: 10px;"></i>
+                                    <p style="margin: 0; padding-top: 4px;">The course will keep being updated with new
+                                        topics from MuleSoft.</p>
+                                </div>
+                                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                                    <i class="fa-sharp fa-solid fa-check"
+                                        style="margin-right: 10px; margin-top: 10px;"></i>
+                                    <p style="margin: 0; padding-top: 4px;">One course destination to learn all actions
+                                        of a real-time project.</p>
+                                </div>
+                                <div style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                                    <i class="fa-sharp fa-solid fa-check"
+                                        style="margin-right: 10px; margin-top: 10px;"></i>
+                                    <p style="margin: 0; padding-top: 4px;">The real-time project of this course helps
+                                        you deal with all real-time project activities and makes you confident while
+                                        working in real-time.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 chapters-list">
+                <div style="display: flex; margin-top: 10px; justify-content: space-between;">
+                    <div style="margin-left: 20px; font-weight: bold; cursor: pointer; border: none;">
+                        <h4>Course content</h4>
+                    </div>
+                    <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-x-lg" style=" margin-top: 5px; margin-right: 10px;" viewBox="0 0 16 16">
+                            <path
+                                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                        </svg> </div>
+                </div>
+                <div class="chapter-item">
+                    <!-- Chapter Item 1 -->
+                    <div style="border: #cac0c0 1px solid;">
+                        <div class="container-fluid  justify-content-between align-items-center"
+                            style="width: 100%; margin-top: 5px;  ">
+                            <div class="d-flex align-items-center" style="margin-left: 5px;">
+                                <input type="checkbox" id="chapter-4" style="margin-right: 10px;">
+                                <p style="margin-left: 10px; margin-top: auto; margin-bottom: auto; ">2. Integration
+                                    introduction</p>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between"
+                                style="margin-left: 35px; margin-top: 10px;">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-file-earmark-play" viewBox="0 0 16 16">
+                                        <path
+                                            d="M6 6.883v4.234a.5.5 0 0 0 .757.429l3.528-2.117a.5.5 0 0 0 0-.858L6.757 6.454a.5.5 0 0 0-.757.43z" />
+                                        <path
+                                            d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
+                                    </svg>
+                                    <span class="duration" style="margin-right: 5px;">8min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Chapter Item 2 -->
+                        <div class="container-fluid  justify-content-between align-items-center"
+                            style="width: 100%; margin-top: 10px;">
+                            <div class="d-flex align-items-center" style="margin-left: 5px;">
+                                <input type="checkbox" id="chapter-4" style="margin-right: 10px;">
+                                <p style="margin-left: 10px; margin-top: auto; margin-bottom: auto; ">3. Mule API
+                                    development life cycle and
+                                    components</p>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between"
+                                style="margin-left: 35px; margin-top: 10px;">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-file-earmark-play" viewBox="0 0 16 16">
+                                        <path
+                                            d="M6 6.883v4.234a.5.5 0 0 0 .757.429l3.528-2.117a.5.5 0 0 0 0-.858L6.757 6.454a.5.5 0 0 0-.757.43z" />
+                                        <path
+                                            d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
+                                    </svg>
+                                    <span class="duration" style="margin-right: 5px;">4min</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid  justify-content-between align-items-center"
+                            style="width: 100%; margin-top: 10px;">
+                            <div class="d-flex align-items-center" style="margin-left: 5px;">
+                                <input type="checkbox" id="chapter-4" style="margin-right: 10px;">
+                                <p style="margin-left: 10px;margin-top: auto; margin-bottom: auto; ">4. Course resources
+                                    & documents</p>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between" style="margin-left: 35px; margin-bottom: 10px;">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-file-earmark-play" viewBox="0 0 16 16">
+                                        <path
+                                            d="M6 6.883v4.234a.5.5 0 0 0 .757.429l3.528-2.117a.5.5 0 0 0 0-.858L6.757 6.454a.5.5 0 0 0-.757.43z" />
+                                        <path
+                                            d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
+                                    </svg>
+                                    <span class="duration" style="margin-right: 5px;">1min</span>
+                                </div>
+                                <div class=" abc1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-folder" viewBox="0 0 16 16">
+                                        <path
+                                            d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a2 2 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139q.323-.119.684-.12h5.396z" />
+                                    </svg>
+                                    <p style="padding-top: 10px;">Resources</p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Collapsible Section -->
+                    <div class="" style="display: grid;">
+
+                        <div class="collapsible" style="width: 100%; height: 100%; border: #cac0c0 1px solid;">
+                            <div style="display: flex; justify-content: center; ">
+
+                                <button class="collapsible"
+                                    style=" border: none; background: none; padding: 0; font-weight: bold; cursor: pointer;">
+
+                                    Section 2: Mule 4 installation set-up
+                                </button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-down" style="float: right; margin-top:5px;"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                                </svg>
+                            </div>
+                            <p class="p-testc" style="margin: 5px;">0 / 2 | 21min</p>
+                        </div>
+                        <div class="collapsible" style="width: 100%; height: 100%; border: #cac0c0 1px solid; ">
+                            <div style="display: flex; justify-content: center; ">
+                                <button class="collapsible"
+                                    style=" border: none; background: none; padding: 0; font-weight: bold; cursor: pointer;">
+                                    Section 3: Mule basics - develop first mule app, run, debug, export & import mule
+                                    app
+                                </button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-down" style="float: right; margin-top: 5px;"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                                </svg>
+                            </div>
+                            <p class="p-testc" style="margin: 5px;">0 / 2 | 21min</p>
+                        </div>
+
+                        <div class="collapsible" style="width: 100%; height: 100%; border: #cac0c0 1px solid; ">
+                            <div style="display: flex; justify-content: center; ">
+                                <button class="collapsible"
+                                    style=" border: none; background: none; padding: 0; font-weight: bold; cursor: pointer;">
+                                    Section 4: Mule basics - Mule events and mule message structure
+                                </button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-down" style="float: right; margin-top: 5px;"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                                </svg>
+                            </div>
+                            <p class="p-testc" style="margin: 5px;">0 / 2 | 21min</p>
+                        </div>
+                        <div class="collapsible" style="width: 100%; height: 100%; border: #cac0c0 1px solid; ">
+                            <div style="display: flex; justify-content: center; ">
+                                <button class="collapsible"
+                                    style=" border: none; background: none; padding: 0; font-weight: bold; cursor: pointer;">
+                                    Section 5: Mule basics - Basic transformations
+                                </button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-down" style="float: right; margin-top: 5px;"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                                </svg>
+                            </div>
+                            <p class="p-testc" style="margin: 5px;">0 / 2 | 21min</p>
+                        </div>
+                        <div class="collapsible" style="width: 100%; height: 100%; border: #cac0c0 1px solid; ">
+                            <div style="display: flex; justify-content: center; ">
+                                <button class="collapsible"
+                                    style=" border: none; background: none; padding: 0; font-weight: bold; cursor: pointer;">
+                                    Section 6: Mule rest-full services (database) as provider - simple use case to get
+                                    started
+                                </button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-down" style="float: right; margin-top: 5px;"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                                </svg>
+                            </div>
+                            <p class="p-testc" style="margin: 5px;">0 / 2 | 21min</p>
+                        </div>
+                        <div class="collapsible" style="width: 100%; height: 100%; border: #cac0c0 1px solid; ">
+                            <div style="display: flex; justify-content: center; ">
+                                <button class="collapsible"
+                                    style=" border: none; background: none; padding: 0; font-weight: bold; cursor: pointer;">
+                                    Section 7: Dataweave language - basics
+                                </button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-down" style="float: right; margin-top: 5px;"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                                </svg>
+                            </div>
+                            <p class="p-testc" style="margin: 5px;">0 / 2 | 21min</p>
+                        </div>
+
+                        <div class="collapsible" style="width: 100%; height: 100%; border: #cac0c0 1px solid; ">
+                            <div style="display: flex; justify-content: center; ">
+                                <button class="collapsible"
+                                    style=" border: none; background: none; padding: 0; font-weight: bold; cursor: pointer;">
+                                    Section 8: Mule database module - first system api uhub (database) sapi...
+                                </button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-down" style="float: right; margin-top: 5px;"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                                </svg>
+                            </div>
+                            <p class="p-testc" style="margin: 5px;">0 / 2 | 21min</p>
+                        </div>
+
+                        <div class="collapsible" style="width: 100%; height: 100%; border: #cac0c0 1px solid; ">
+                            <div style="display: flex; justify-content: center; ">
+                                <button class="collapsible"
+                                    style=" border: none; background: none; padding: 0; font-weight: bold; cursor: pointer;">
+                                    Section 9: Mule validation module and flow types
+                                </button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-down" style="float: right; margin-top: 5px;"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                                </svg>
+                            </div>
+                            <p class="p-testc">0 / 7 | 57min</p>
+                        </div>
+
+                        <div class="collapsible" style="width: 100%; height: 100%; border: #cac0c0 1px solid; ">
+                            <div style="display: flex; justify-content: center; ">
+                                <button class="collapsible"
+                                    style=" border: none; background: none; padding: 0; font-weight: bold; cursor: pointer;">
+                                    Section 10: Mule error handling
+                                </button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-down" style="float: right; margin-top: 5px;"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                                </svg>
+                            </div>
+                            <p class="p-testc" style="margin: 5px;">0 / 11 | 2hr 22min</p>
+                        </div>
+
+                        <div class="collapsible" style="width: 100%; height: 100%; border: #cac0c0 1px solid; ">
+                            <div style="display: flex; justify-content: center; ">
+                                <button class="collapsible"
+                                    style=" border: none; background: none; padding: 0; font-weight: bold; cursor: pointer;">
+                                    Section 11: Anypoint platform introduction & access management
+                                </button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-down" style="float: right; margin-top: 5px;"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                                </svg>
+                            </div>
+                            <p class="p-testc" style="margin: 5px;">0 / 3 | 19min</p>
+                        </div>
+
+                        <div class="collapsible" style="width: 100%; height: 100%; border: #cac0c0 1px solid; ">
+                            <div style="display: flex; justify-content: center; ">
+                                <button class="collapsible"
+                                    style=" border: none; background: none; padding: 0; font-weight: bold; cursor: pointer;">
+                                    Section 12: Anypoint Platform - Design Center - Design API's Using RAML
+                                </button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-down" style="float: right; margin-top: 5px;"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                                </svg>
+                            </div>
+                            <p class="p-testc" style="margin: 5px;">0 / 6 | 1hr</p>
+                        </div>
+
+                        <div class="collapsible" style="width: 100%; height: 100%; border: #cac0c0 1px solid; ">
+                            <div style="display: flex; justify-content: center; ">
+                                <button class="collapsible"
+                                    style=" border: none; background: none; padding: 0; font-weight: bold; cursor: pointer;">
+                                    Section 13: Anypoint Platform - Design Center - Design Fragments Based API's Usi...
+                                </button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-chevron-down" style="float: right; margin-top: 5px;"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                                </svg>
+                            </div>
+                            <p class="p-testc" style="margin: 5px;">0 / 9 | 57min</p>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
