@@ -1,0 +1,179 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    padding: 20px;
+    background: #f4f4f4;
+    text-align: left;
+    color: #ddd;
+
+}
+
+
+.content {
+    padding: 50px 30px;
+}
+
+
+
+
+
+button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* header */
+.first {
+    background-color: #2d2f31;
+    padding-left: 10px;
+    color: #ffffff;
+    display: block;
+
+}
+.first .first-1 {
+    padding-top: 30px;
+}
+
+
+.first h1 p {
+    color: #f5f5f5;
+}
+
+.first .first-1 {
+    display: flex;
+    gap: 10px;
+}
+.first .first-1 .p-specil {
+    color: #ccbdbd;
+
+}
+
+.first .nav-tabs a {
+    display: inline-block;
+    text-decoration: none;
+    color: #ccbdbd;
+    padding: 10px;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    /* Slightly bold */
+}
+
+.first .nav-tabs a:hover,
+.first .nav-tabs a.active {
+    text-decoration: none; /* Hiện gạch chân khi hover hoặc active */
+    color: #e3e6e9; /* Đổi màu khi hover */
+    border-bottom: #ddd 7px solid;
+    margin-bottom: 5px; /* Tạo khoảng cách nhỏ */
+}
+.my-badges {
+    width: 100%;
+}
+.my-badges h4 {
+    font-weight: bold;
+}
+.my-badges .phead {
+    display: flex; justify-content: space-between; margin-top: 20px;
+    gap: 10px;
+}
+
+.my-badges div p  span {
+    font-weight: bolder;
+}
+.my-badges .phead button {
+    background-color: #a535f0;
+    font-weight: bold;
+}
+.my-badges p {
+    padding-top: 20px;
+    width: 50%;
+}
+.cert-prep h2 {
+    margin-top: 30px;
+}
+.cert-prep .detail-certifi {
+    display: flex; 
+    justify-content: space-between;
+     align-items: center;
+     margin-top: 50px;
+     margin-bottom: 50px;
+     gap: 10px;
+
+}
+.cert-prep .detail-certifi .text-abc {
+    width: 35%;
+    font-size: large;
+    
+}
+.cert-prep .detail-certifi p span {
+    font-weight: bolder;
+}
+.cert-prep .detail-certifi button {
+    background-color: white;
+    color: black;
+    border: #2d2f31 1px solid;
+}
+.div-all .content .cert-prep .container-fluidvv .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    border-radius: 5px;
+
+}
+
+.div-all .content .cert-prep .container-fluidvv .grid .g-col-6 {
+    border: #a3a9af 1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.div-all .content .cert-prep .container-fluidvv .grid .g-col-6 .img-1 {
+    margin-left: 30px;
+
+}
+
+.svg1 {
+    display: flex; justify-content: end; padding-top: 30px;  padding-right: 50px;
+}
+.svg1-learn {
+    display: flex; justify-content: start; padding-right: 50px;
+}
+.text-img  {
+    height: 100%;
+}
+.div-all .content .cert-prep .container-fluidvv .grid .g-col-6 .text-img .text {
+    width: 100%;
+    margin-top: 10px;
+    padding-left: 30px;
+    margin-right: 200px;
+ 
+    }
+
+
+.div-all .content .cert-prep .container-fluidvv .grid .g-col-6 .text-img .text .text-specil {
+    font-weight: 900;
+    font-size: x-large;
+    
+}
+.div-all .content .cert-prep .container-fluidvv .grid .g-col-6 .text-img .text .text-specil1 {
+    margin-top: 20px;
+    background-color: rgb(168, 164, 164);
+    padding: 0px 10px;
+}
+
+.div-all .content .cert-prep .container-fluidvv .grid .g-col-6 .text-img .text .text-learn {
+    font-weight: 550;
+    font-size: large;
+    width: 70%;
+}
+.div-all .content .cert-prep .container-fluidvv .grid .g-col-6 .text-img .text .text-a {
+    padding-bottom: 30px;
+}
