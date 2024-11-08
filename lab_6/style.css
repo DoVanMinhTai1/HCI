@@ -1,0 +1,277 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.info-card {
+    position: absolute;
+    top: 0;
+    left: 100%; /* Đặt thẻ bên phải thẻ khóa học */
+    margin-left: 20px;
+    z-index: 10;
+    margin-left: 100px;
+}
+
+
+.card-detail {
+    border-radius: 10px;
+    height: 100%;
+}
+.card-img-top {
+    width: 100%;               /* Chiều rộng 100% để khớp với khung */
+    height: 200px;             /* Thiết lập chiều cao cố định */
+    object-fit: cover;         /* Cắt ảnh để giữ nguyên tỷ lệ mà không bị biến dạng */
+}
+
+.text-body {
+    padding-left: 15px;
+}
+.card-title {
+    font-weight: bold;
+}
+
+.card-text {
+    color: #555;
+}
+.card-detail .card-body .rate-flow {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+.card-detail .card-body .rate-flow div{
+    display: flex;
+    
+    
+}
+.card-detail .card-body .rate-flow div i{
+    flex-grow: 1;
+    height: 100%;
+    margin-right: 3px;
+    padding-top: 3px;
+    align-items: center;
+    color: #ffc107;
+}
+
+.card-detail .card-body .text-price {
+    margin-top: 10px;
+    font-size: large;
+    font-weight: 700;
+}
+.badge-warning {
+    flex: 1;
+    position: relative;
+    bottom: 5px;
+    height: 100%;
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.title1, .title-item1 {
+    margin: 0 10px;            /* Tạo khoảng cách giữa các phần tử */
+}
+.row1 {
+    display: flex;               /* Sử dụng Flexbox cho hàng này */
+    white-space: nowrap;        /* Ngăn không cho các phần tử xuống hàng */
+    
+}
+.margin-t {
+    margin-top: 50px;
+    padding-left: 30px;
+}
+.row1 > a {
+    margin-right: 20px;
+}
+.row1 a .col .card-radius {
+    padding: 10px 30px;
+    color: rgb(49, 38, 38);
+    font-weight: 600;
+    text-align: left;
+} 
+.row1 a .col .card-radius:hover {
+    background-color: #0c0c0b;
+    color:white
+}
+.col {
+    flex: 0 0 auto;             /* Đảm bảo các cột có chiều rộng tự động */
+   
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.card-radius {
+    width: 100%;
+    margin-right: 15px;         /* Thêm khoảng cách giữa các thẻ card */
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    gap: 10px;
+    background-color: #e5e9ec;
+}
+
+.card-radius:first-child {
+    border-top-left-radius: 100px;       /* Bo tròn góc trên bên trái */
+    border-bottom-left-radius: 100px;    /* Bo tròn góc dưới bên trái */
+}
+
+.card-radius:last-child {
+    border-top-right-radius: 100px;      /* Bo tròn góc trên bên phải */
+    border-bottom-right-radius: 100px;    /* Bo tròn góc dưới bên phải */
+}
+.title-card {
+    font-weight: bold;          /* Làm cho tiêu đề nổi bật hơn */
+    white-space: nowrap;       /* Ngăn không cho văn bản xuống dòng */
+    text-decoration: none;
+
+    text-overflow: ellipsis;   /* Thêm dấu "..." nếu văn bản bị cắt */
+}
+
+
+.title-card-item {
+    color: gray;      
+    white-space: nowrap;          /* Thay đổi màu cho dòng thứ hai */
+    text-decoration: none;
+
+}
+
+
+/* 8.html */
+.nav-item:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; 
+    
+}
+.nav-link .caret-space {
+    margin-left: 5px; /* Điều chỉnh khoảng cách mong muốn */
+}
+
+.intro-text p.smallTag {
+    margin: 0;
+    text-align: center;
+    width: inherit;
+    margin-top: 37px;
+}
+
+.intro-text h1 {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    padding: 0 0 12px;
+    font-size: 41px;
+    line-height: 50px;
+    margin-bottom: 10px;
+    margin-top: 25px;
+}
+
+.intro-text p {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    line-height: 27px;
+    margin: 40px auto;
+    margin-top: 0;
+    margin-bottom: 21px;
+    opacity: .7;
+    font-size: 16px;
+    width: 50%;
+}
+
+
+h1 {
+    font-size: 39px;
+    line-height: 64px;
+   
+}
+h1 {
+    display: block;
+    font-size: 2em;
+
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+.trial-form {
+    display: flex;
+    width: 600px;
+    justify-content: space-between;
+    gap: 0;
+    padding: 20px;
+    margin: 0 auto;
+}
+.trial-form input {
+    flex-grow: 2;
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+    background: #eff0f0;
+    padding-left: 20px;
+}
+.trial-form input, .trial-form button {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    border: 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 31px;
+    outline: none;
+}
+
+
+input[type="text"], input[type="email"] {
+    font-size: 16px;
+    line-height: 20px;
+    padding: 12px;
+    font-weight: 300;
+    border: 0;
+    width: 300px;
+}
+.trial-form button {
+    background-color: #2ED1A5;
+    flex-grow: 1;
+    border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+}
+.trial-form input, .trial-form button {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    border: 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 31px;
+    outline: none;
+}
+.learnMoreLink {
+    margin-bottom: 0 !important;
+}
+.learnMoreLink a {
+    opacity: .7;
+    text-decoration: underline;
+    color: var(--dark-grey-blue);
+    font-size: 14px;
+}
+.leftSideImage, .rightSideImage {
+    width: 17%;
+    position: absolute;
+    top: 100px; /* Đặt cùng giá trị top cho cả hai ảnh */
+    z-index: 1;
+}
+
+.leftSideImage {
+    left: 0;
+}
+
+.rightSideImage {
+    right: 0;
+}
+.bottom-section {
+    background: #032538;
+    overflow: auto;
+    margin-top: 180px;
+    padding-left: calc(25% / 2 + 20px) !important;
+    padding-right: calc(25% / 2 + 20px) !important;
+  
+  
+}
+.bottom-section img.mainTopCurve {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100px;
+}
