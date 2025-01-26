@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -13,41 +13,125 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <style>
+        
+        body {
+    background-image: url('/imageHome.jpg'); /* Đường dẫn tới hình ảnh */
+    background-size: cover; /* Đảm bảo ảnh phủ kín màn hình */
+    background-repeat: no-repeat; /* Không lặp lại ảnh */
+    background-attachment: fixed; /* Giữ cố định khi cuộn trang */
+    background-position: center center; /* Căn giữa ảnh */
+    padding-top: 80px;
+}
+
+    header {
+        opacity: 0.7;
+    background-color: rgba(255, 255, 255, 0.5); /* Nền trắng với độ trong suốt */
+    backdrop-filter: blur(10px); /* Làm mờ nội dung phía sau */
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Đường viền mờ phía dưới */
+    position: fixed; /* Cố định vị trí header khi cuộn trang */
+    top: 0;
+    width: 100%; /* Chiều rộng header */
+    z-index: 1000; /* Đảm bảo header ở trên các thành phần khác */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng đổ bóng nhẹ */
+    display: flex; /* Giữ các thành phần trong header theo hàng ngang */
+    justify-content: center; /* Căn giữa nội dung */
+}
+/* Đảm bảo menu nằm ngang và căn chỉnh đẹp */
+header ul.nav {
+    display: flex;
+    justify-content: center; /* Căn giữa menu */
+    align-items: center; /* Căn giữa theo trục dọc */
+    margin: 0;
+    padding: 0;
+}
+
+header ul.nav li {
+    list-style: none;
+}
+    header a, header span {
+    color: black; /* Đặt màu chữ đen */
+    font-weight: bold; /* Tăng độ đậm cho chữ */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Hiệu ứng đổ bóng cho chữ */
+    transition: transform 0.3s ease, text-shadow 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+header a:hover, header span:hover {
+    transform: scale(1.1); /* Phóng to chữ khi hover */
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7); /* Tăng bóng khi hover */
+}
+
+/* Li styles */
+header ul.nav li {
+    list-style: none; /* Xóa dấu chấm hoặc số trước danh sách */
+    margin: 0 10px; /* Tạo khoảng cách giữa các mục menu */
+}
+
+/* A styles */
+header ul.nav li a {
+    color: black; /* Đặt màu chữ là đen */
+    font-size: 1rem; /* Đặt kích thước chữ */
+    font-weight: bold; /* Làm đậm chữ */
+    text-decoration: none; /* Xóa gạch chân */
+    padding: 8px 12px; /* Thêm padding để tạo không gian cho liên kết */
+    border-radius: 5px; /* Bo góc mềm mại */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng mượt mà khi hover */
+}
+
+/* Hover effect for A */
+header ul.nav li a:hover {
+    background-color: #f0f0f0; /* Nền sáng khi hover */
+    color: #007bff; /* Đổi màu chữ thành xanh nhạt */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Thêm hiệu ứng bóng chữ */
+}
+
+/* Active link style */
+header ul.nav li a.active {
+    background-color: #007bff; /* Nền xanh cho mục đang hoạt động */
+    color: white; /* Chữ trắng nổi bật */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Hiệu ứng nổi bật hơn */
+}
+
+</style>
+<style>
+    #home {
+        background-color: rgba(255, 255, 255, 0.7); /* Nền mờ */
+        padding: 50px 0; /* Khoảng cách trên dưới */
+        color: #333; /* Màu chữ */
+        text-align: center; /* Căn giữa chữ */
+        font-family: 'Arial', sans-serif; /* Chọn font */
+    }
+
+    #home h2 {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    #home p {
+        font-style: italic;
+        font-size: 1.2rem;
+        color: #555;
+    }
+    .pagination-buttons {
+            display: none; /* Ẩn nút Previous và Next */
+        }
+</style>
+
+       
 </head>
 
 <body>
-
-    <!-- <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#home"
-                                onclick="showSection('home')">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#about" onclick="showSection('about')">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#labs" onclick="showSection('labs')">Labs</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header> -->
     <header class="d-flex123 justify-content-center py-3 mb-4 border-bottom" style="display: flex; ">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
             <svg class="bi me-2" width="40" height="32">
                 <use xlink:href="#bootstrap"></use>
             </svg>
-            <span class="fs-4">Simple header</span>
+            <span class="fs-4">HCI</span>
         </a>
 
         <ul class="nav nav-pills">
-            <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="#" class="nav-link active" onclick="showSection('home')">Home</a></li>
             <li class="nav-item"><a href="#" class="nav-link" onclick="loadLabContent('lab_1/file/lab1.html')">Lab 1</a>
             </li>
             <li class="nav-item"><a href="#" class="nav-link" onclick="loadLabContent('lab_2/homepage.html')">Lab 2</a>
@@ -66,63 +150,371 @@
 
         <!-- Labs Section -->
     </header>
-    <section id="labs" class="content-section" style="display: block;">
 
-        <div id="lab-content" class="mt-4">
+    
+    <section id="labs" class="content-section container" style="display: block; background-color: #f0f0f0;" >
+        <div id="requirement" style="display: none;">
+            <h3>Requirement</h3>
+            <p>Design a user interface (UI) for a course management system based on the following database table structure for a Course. Ensure the UI reflects the necessary fields and actions to create, view, and update courses.UI Requirements:: This field should be auto-generated by the system, so it doesn't need to be editable by the user. Display this value when viewing or editing a course.: Create an input field that allows the user to enter the course name. This field should be required and should accept up to 255 characters.: Include a text area for users to provide a detailed description of the course. This field can be optional but should allow longer text.: Display a dropdown or search functionality that allows users to select the course's instructor from the list of existing users. This field references the created_by field, which is linked to the User table.: Display the timestamp indicating when the course was created. This value should be automatically generated and displayed to the user, but not editable.: Display the last updated timestamp. This value should be automatically updated by the system whenever changes are made to the course and should not be editable by users.:
+                : Provide a button or form submission option to allow users to create a new course with the specified details.
+                : Allow users to modify the course_name, course_description, and created_by fields while showing the auto-generated fields like course_id, created_at, and updated_at in read-only mode.
+                : Include a page or modal for viewing the details of a course without editing it.
+                : Optionally, provide a button to delete a course, ensuring that confirmation prompts are in place before deletion.
+                The UI should be intuitive, with clear labels and validation for required fields like course_name.</p>
+        </div>
+        <div id="design" style="display: none;">
+            <h3>Design</h3>
+            <img src="./image1.png" alt="" width="400px">
 
         </div>
+        <div id="implement" style="display: none;">
+            <h3>Implement</h3>  
+        </div>
+        <div id="requirement1" style="display: none;">
+            <h3>Requirement</h3>
+            <p>
+                Students should authenticate before accessing the system.
+Username/Email
+Password
+Login button
+Forgot Password link
+Simple, clean, and secure login screen.
+After login, students should land on a dashboard that displays available exercises to choose from.
+Display exercises grouped by programming language (C, Python, Java).
+Exercise title
+Short description
+Difficulty level (Easy/Medium/Hard)
+Time limit (if any)
+Points or grades attached (optional)
+
+ Allow students to filter exercises by programming language. To search for exercises based on keywords. Indicate whether an exercise has been completed, in progress, or not started.
+Select an exercise
+View exercise details
+Once an exercise is selected, students are taken to a coding environment to implement their solution.
+Display the exercise title and description at the top.
+Syntax highlighting for C, Python, Java
+Line numbers and auto-complete
+Language switcher (to select the language)
+Pre-loaded template (based on the selected language)
+Instructions and constraints provided for the exercise
+Display predefined test cases with expected input/output
+Allow students to create and run their own test cases (optional)
+Run Code button to compile and run the code
+Clear Code button to reset the editor
+Submission button to submit the final solution for grading
+Run the code (compile + execute)
+Submit the code
+After submission, students should see the results of their submission.
+Status (Success/Failed/Compilation Error/Time Limit Exceeded)
+Output Show actual output versus expected output for each test case.
+List all test cases with
+Input
+Expected output
+Actual output
+Status (Passed/Failed)
+Show score based on test cases passed
+If there are multiple test cases, show how many passed
+Display performance metrics like time taken and memory used (if applicable).
+Try again button to return to the code editor for improvements
+Return to dashboard button
+Show rankings based on student performance (optional, for competitive environments).
+Allow students to leave feedback on exercises or ask for help.
+Provide a hint button that can be used a limited number of times.
+Allow students to save their progress and return later to complete the exercise.
+Code execution should happen in isolated environments (containers or sandboxes) for security reasons.
+Limit execution time to prevent infinite loops.
+Store previous attempts so students can review their submissions.
+Each screen should have a simple design with minimal distractions.
+Ensure the system is mobile-friendly so students can work from any device.
+Clearly communicate syntax and runtime errors to students.
+            </p>
+        </div>
+        <div id="design1" style="display: none;">
+            <h3>Design</h3>
+            <img src="./image2.png" alt="" width="400px">
+
+        </div>
+        <div id="implement1" style="display: none;">
+            <h3>Implement</h3>  
+        </div>
+        <div id="requirement2" style="display: none;">
+            <h3>Requirement</h3>
+            <p>Các bạn thể hiện cho cô chức năng: chia sẻ tài liệu học tập cho sinh viên theo môn học. Mỗi môn học có thể chia sẻ các tài liệu như Bài giảng / Bài tập / Tài liệu tham khảo.</p>
+        </div>
+        <div id="design2" style="display: none;">
+            <h3>Design</h3>
+            <img src="./image3.png" alt="" width="400px">
+            <img src="./image3_1.png" alt="" width="400px">
+           
+        </div>
+        <div id="implement2" style="display: none;">
+            <h3>Implement</h3>  
+        </div>
+        <div id="requirement3" style="display: none;">
+            <h3>Requirement</h3>
+            <p>yêu cầu Req3 và Re4 ghép lại thành 1 trang</p>
+        </div>
+        <div id="design3" style="display: none;">
+            <h3>Design</h3>
+            <img src="./image4.png" alt="" width="400px">
+            <img src="./image4_1.png" alt="" width="400px">
+         
+        </div>
+        <div id="implement3" style="display: none;">
+            <h3>Implement</h3>  
+        </div>
+        <div id="requirement4" style="display: none;">
+            <h3>Requirement</h3>
+            <p> yêu cầu Req3, 4, 5</p>
+        </div>
+        <div id="design4" style="display: none;">
+            <h3>Design</h3>
+            <img src="./image5.png" alt="" width="400px">
+            <img src="./image5_11.png" alt="" width="400px">
+
+        </div>
+        <div id="implement4" style="display: none;">
+            <h3>Implement</h3>  
+        </div>
+        <div id="requirement5" style="display: none;">
+            <h3>Requirement</h3>
+            <p>Req 5, 6, 7, 8</p>
+        </div>
+        <div id="design5" style="display: none;">
+            <h3>Design</h3>
+            <img src="./image6.png" alt="" width="400px">
+            <img src="./image6_1.png" alt="" width="400px">
+            <img src="./6_2.png" alt="" width="400px">
+            <img src="./6_3.png" alt="" width="400px">
+        
+        </div>
+        <div id="implement5" style="display: none;">
+            <h3>Implement</h3>  
+        </div>
+        <div id="pagination-buttons" class="pagination-buttons d-flex justify-content-between mt-3">
+            <button id="pagi-left" class="btn btn-primary" onclick="changePage(-1)"  style="display: none;">Previous</button>
+            <button  id="pagi-right" class="btn btn-primary" onclick="changePage(1)" style="display: none;">Next</button>
+        </div>
+        <div id="pagination-buttons" class="pagination-buttons d-flex justify-content-between mt-3">
+            <button id="pagi-left5" class="btn btn-primary" onclick="changePage5(-1)"  style="display: none;">Previous</button>
+            <button  id="pagi-right5" class="btn btn-primary" onclick="changePage5(1)" style="display: none;">Next</button>
+        </div>
+        <div id="lab-container" class=" mt-4" >
+            <section id="home" class="content-section" style="text-align: center; padding: 20px;">
+                <h2>Welcome to My Learning Journey</h2>
+                <p>"Education is the most powerful weapon which you can use to change the world." — Nelson Mandela</p>
+            </section>
+          
+            <section id="lab-section">
+                <!-- Nội dung này sẽ được thay thế khi click vào Lab -->
+               
+            </section>
+        </div>
+       
+      
     </section>
-
-    <!-- <div class="wrapper">
-        <main>
-            <section id="home" class="content-section">
-                <h2>Home</h2>
-                <p>Welcome! This is a sample personal website. Explore the About section to know more about me or visit
-                    the Labs section to view the projects.</p>
-            </section>
-
-            <section id="about" class="content-section" style="display: none;">
-                <h2>About Me</h2>
-                <ul>
-
-                    <li>Name: Đỗ Văn Minh Tài</li>
-                    <li>Age: 20</li>
-                    <li>Birthday: 05/10/2004</li>
-                    <li>Profession: Web Developer</li>
-                    <li>Skills: HTML, CSS, JavaScript</li>
-                </ul>
-            </section>
-
-        </main>
-    </div> -->
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-..."
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
     <script>
-        function showSection(sectionId) {
+          function showSection(sectionId) {
             document.querySelectorAll('.content-section').forEach(section => {
                 section.style.display = 'none';
             });
             document.getElementById(sectionId).style.display = 'block';
         }
-
+        const labPages = [
+            "./lab_6/index.html",
+    "./lab_6/7.html", 
+    "./lab_6/8.html"
+];
+  
         function loadLabContent(filePath) {
-            fetch(filePath)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('lab-content').innerHTML = data;
-                })
-                .catch(error => console.error('Error loading lab content:', error));
+    const labContainer = document.getElementById('lab-container');
+    const pagileft = document.getElementById('pagi-left');
+    const pagiright = document.getElementById('pagi-right');
+    const pagileft5 = document.getElementById('pagi-left5');
+    const pagiright5 = document.getElementById('pagi-right5');
+    const designSection = document.getElementById('design');
+        const implementSection = document.getElementById('implement');
+        const requirementSection = document.getElementById('requirement');
+        const designSection1 = document.getElementById('design1');
+        const implementSection1 = document.getElementById('implement1');
+        const requirementSection1 = document.getElementById('requirement1');
+        const designSection2 = document.getElementById('design2');
+        const implementSection2 = document.getElementById('implement2');
+        const requirementSection2 = document.getElementById('requirement2');
+        const designSection3 = document.getElementById('design3');
+        const implementSection3 = document.getElementById('implement3');
+        const requirementSection3 = document.getElementById('requirement3');
+        const designSection4 = document.getElementById('design4');
+        const implementSection4 = document.getElementById('implement4');
+        const requirementSection4 = document.getElementById('requirement4');
+        const designSection5 = document.getElementById('design5');
+        const implementSection5 = document.getElementById('implement5');
+        const requirementSection5 = document.getElementById('requirement5');
+        // Hide all sections initially
+        designSection.style.display = 'none';
+        implementSection.style.display = 'none';
+        requirementSection.style.display = 'none';
+    designSection1.style.display = 'none';
+        implementSection1.style.display = 'none';
+        requirementSection1.style.display = 'none';
+        designSection2.style.display = 'none';
+        implementSection2.style.display = 'none';
+        requirementSection2.style.display = 'none';
+        designSection3.style.display = 'none';
+        implementSection3.style.display = 'none';
+        requirementSection3.style.display = 'none';
+        designSection4.style.display = 'none';
+        implementSection4.style.display = 'none';
+        requirementSection4.style.display = 'none';
+        designSection5.style.display = 'none';
+        implementSection5.style.display = 'none';
+        requirementSection5.style.display = 'none';
+        if (filePath === 'lab_1/file/lab1.html') {
+            requirementSection.style.display = 'block'; // Show requirement
+            designSection.style.display = 'block'; // Show design
+            implementSection.style.display = 'block'; // Show implementation
         }
-        function showContent() {
-            alert("Lab content is loaded!");
+        if (filePath === 'lab_2/homepage.html') {
+            requirementSection1.style.display = 'block'; // Show requirement
+            designSection1.style.display = 'block'; // Show design
+            implementSection1.style.display = 'block'; // Show implementation
+        }
+        if (filePath === 'lab_3/index.html') {
+            requirementSection2.style.display = 'block'; // Show requirement
+            designSection2.style.display = 'block'; // Show design
+            implementSection2.style.display = 'block'; // Show implementation
+        }
+        if (filePath === 'lab_4/index.html') {
+            requirementSection3.style.display = 'block'; // Show requirement
+            designSection3.style.display = 'block'; // Show design
+            implementSection3.style.display = 'block'; // Show implementation
+        }
+        if (filePath === 'lab_5/index.html') {
+            requirementSection4.style.display = 'block'; // Show requirement
+            designSection4.style.display = 'block'; // Show design
+            implementSection4.style.display = 'block'; // Show implementation
+        }
+        if (filePath === 'lab_6/index.html') {
+            requirementSection5.style.display = 'block'; // Show requirement
+            designSection5.style.display = 'block'; // Show design
+            implementSection5.style.display = 'block'; // Show implementation
+        }
+    // Kiểm tra nếu Shadow DOM đã tồn tại
+    if (!labContainer.shadowRoot) {
+        const shadowRoot = labContainer.attachShadow({ mode: 'open' });
+
+        // Tạo một style mặc định cho Shadow DOM
+        const style = document.createElement('style');
+        style.textContent = `
+            /* Bạn có thể thêm CSS mặc định ở đây nếu cần */
+        `;
+        shadowRoot.appendChild(style);
+
+        // Tạo một phần tử nội dung
+        const contentDiv = document.createElement('div');
+        contentDiv.setAttribute('id', 'shadow-content');
+        shadowRoot.appendChild(contentDiv);
+    }
+
+    // Tiếp tục tải nội dung vào Shadow DOM
+    fetch(filePath)
+        .then(response => response.text())
+        .then(data => {
+            const shadowContent = labContainer.shadowRoot.querySelector('#shadow-content');
+            shadowContent.innerHTML = data; // Thay đổi nội dung
+            if (filePath.includes("lab_6/index.html")) {
+                        // paginationButtons.style.display = "block"; // Hiển thị nút Previous và Next nếu là Lab 6
+                        pagileft.style.display = "block";
+                        pagiright.style.display = "block";
+                     } else if(filePath.includes("lab_6/7.html")) {
+                        pagileft.style.display = "block";
+                        pagiright.style.display = "block";
+                     } else if(filePath.includes("lab_6/8.html")) {
+                        pagileft.style.display = "block";
+                        pagiright.style.display = "block";
+                     }
+                    
+                    else {
+                        pagileft.style.display = "none";
+                        pagiright.style.display = "none";                    }
+                        if (filePath.includes("lab_5/index.html")) {
+                        // paginationButtons.style.display = "block"; // Hiển thị nút Previous và Next nếu là Lab 6
+                        pagileft5.style.display = "block";
+                        pagiright5.style.display = "block";
+                     } else if(filePath.includes("lab_5/4.html")) {
+                        pagileft5.style.display = "block";
+                        pagiright5.style.display = "block";
+                     } else if(filePath.includes("lab_5/5.html")) {
+                        pagileft5.style.display = "block";
+                        pagiright5.style.display = "block";
+                     }
+                    
+                    else {
+                        pagileft5.style.display = "none";
+                        pagiright5.style.display = "none";                    }
+
+
+                    //     if (filePath.includes("lab_1/index.html")) {
+                    //     // paginationButtons.style.display = "block"; // Hiển thị nút Previous và Next nếu là Lab 6
+                    //     pagileft5.style.display = "block";
+                    //     pagiright5.style.display = "block";
+                    //  } else if(filePath.includes("lab_5/4.html")) {
+                    //     pagileft5.style.display = "block";
+                    //     pagiright5.style.display = "block";
+                    //  } else if(filePath.includes("lab_5/5.html")) {
+                    //     pagileft5.style.display = "block";
+                    //     pagiright5.style.display = "block";
+                    //  }
+                    
+                    // else {
+                    //     pagileft5.style.display = "none";
+                    //     pagiright5.style.display = "none";                    }
+
+
+
+                        
+        })
+        .catch(error => console.error('Error loading lab content:', error));
+}
+
+
+
+let currentPage = 0;
+function changePage(direction) {
+            currentPage += direction;
+            if (currentPage < 0) {
+                currentPage = labPages.length - 1; // Quay lại trang cuối cùng
+            } else if (currentPage >= labPages.length) {
+                currentPage = 0; // Quay lại trang đầu tiên
+            }
+            loadLabContent(labPages[currentPage]);
         }
 
+        const labpages5 = [
+    "./lab_5/index.html",
+    "./lab_5/4.html",
+    "./lab_5/5.html"
+]
+function changePage5(direction) {
+            currentPage += direction;
+            if (currentPage < 0) {
+                currentPage = labpages5.length - 1; // Quay lại trang cuối cùng
+            } else if (currentPage >= labpages5.length) {
+                currentPage = 0; // Quay lại trang đầu tiên
+            }
+            loadLabContent(labpages5[currentPage]);
+        }
+    
     </script>
 
-
+<script>
+    
+</script>
 </body>
 
 </html>

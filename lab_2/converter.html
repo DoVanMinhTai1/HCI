@@ -67,7 +67,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="homepage.html">Home</a>
+                    <a class="nav-link" href="../lab_2/homepage.html">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Exercises</a>
@@ -81,7 +81,7 @@
                 <button class="btn btn-danger me-2" id="clearCodeButton">Clear Code</button>
                 <button class="btn btn-success" id="submitButton">Submit</button>
             </div>
-            <a href="index.html" class="ms-auto">
+            <a href="../lab_2/index.html" class="ms-auto">
                 <button class="btn btn-light">Logout</button>
             </a>
         </div>
@@ -145,7 +145,7 @@
             const isLoggedIn = localStorage.getItem("isLoggedIn");
             if (isLoggedIn !== "true") {
                 // If not logged in, redirect to login page
-                window.location.href = "index.html";
+                window.location.href = "../lab_2/index.html";
             }
         };
 
@@ -290,7 +290,7 @@
             };
 
             localStorage.setItem('submittedData', JSON.stringify(submittedData)); // Lưu dữ liệu vào localStorage
-            window.location.href = 'submit.html'; // Chuyển hướng đến trang submit.html
+            window.location.href = '../lab_2/submit.html'; // Chuyển hướng đến trang submit.html
         };
     </script>
 </body>
